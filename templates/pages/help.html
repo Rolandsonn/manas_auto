@@ -1,0 +1,333 @@
+{% extends "base.html" %} {% load static %} {% block title %} Помощь — ManasAuto
+{% endblock %} {% block description %} Ответы на частые вопросы пользователей
+ManasAuto. {% endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/help.css' %}?v=1" />
+
+<section class="help-page">
+  <!-- HERO -->
+  <section class="help-hero">
+    <div class="help-hero-content">
+      <span class="help-badge">
+        <i class="bi bi-question-circle"></i>
+        Центр помощи
+      </span>
+
+      <h1>
+        Чем мы можем
+        <span>вам помочь?</span>
+      </h1>
+
+      <p>
+        Здесь вы найдёте ответы на основные вопросы о регистрации, объявлениях,
+        профиле и работе ManasAuto.
+      </p>
+    </div>
+
+    <div class="help-hero-icon">
+      <i class="bi bi-chat-square-dots-fill"></i>
+    </div>
+  </section>
+
+  <!-- БЫСТРЫЕ РАЗДЕЛЫ -->
+  <section class="help-section">
+    <div class="help-heading">
+      <span>ПОМОЩЬ</span>
+
+      <h2>Выберите нужный раздел</h2>
+    </div>
+
+    <div class="help-category-grid">
+      <a href="#account" class="help-category-card">
+        <div class="help-category-icon">
+          <i class="bi bi-person-circle"></i>
+        </div>
+
+        <h3>Аккаунт</h3>
+
+        <p>Регистрация, вход и редактирование профиля.</p>
+      </a>
+
+      <a href="#listing" class="help-category-card">
+        <div class="help-category-icon">
+          <i class="bi bi-car-front"></i>
+        </div>
+
+        <h3>Объявления</h3>
+
+        <p>Как добавить, изменить или удалить автомобиль.</p>
+      </a>
+
+      <a href="#photos" class="help-category-card">
+        <div class="help-category-icon">
+          <i class="bi bi-images"></i>
+        </div>
+
+        <h3>Фотографии</h3>
+
+        <p>Добавление изображений автомобиля и аватара.</p>
+      </a>
+
+      <a href="#security" class="help-category-card">
+        <div class="help-category-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+
+        <h3>Безопасность</h3>
+
+        <p>Как снизить риски при покупке и продаже автомобиля.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- АККАУНТ -->
+  <section class="help-section help-faq-section" id="account">
+    <div class="help-heading">
+      <span>АККАУНТ</span>
+
+      <h2>Регистрация и профиль</h2>
+    </div>
+
+    <div class="accordion help-accordion" id="accountAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#accountOne"
+          >
+            Как зарегистрироваться на ManasAuto?
+          </button>
+        </h2>
+
+        <div
+          id="accountOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#accountAccordion"
+        >
+          <div class="accordion-body">
+            Нажмите кнопку «Регистрация», заполните имя, фамилию, логин, email,
+            номер телефона и пароль. После регистрации войдите в свой аккаунт.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#accountTwo"
+          >
+            Как изменить имя, email или фотографию?
+          </button>
+        </h2>
+
+        <div
+          id="accountTwo"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accountAccordion"
+        >
+          <div class="accordion-body">
+            Откройте «Профиль» и нажмите «Редактировать профиль». Измените
+            данные и нажмите «Сохранить изменения».
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#accountThree"
+          >
+            Почему я не могу войти?
+          </button>
+        </h2>
+
+        <div
+          id="accountThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accountAccordion"
+        >
+          <div class="accordion-body">
+            Проверьте правильность логина и пароля. Убедитесь, что вы вводите
+            тот логин, который использовали при регистрации.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОБЪЯВЛЕНИЯ -->
+  <section class="help-section help-faq-section" id="listing">
+    <div class="help-heading">
+      <span>ОБЪЯВЛЕНИЯ</span>
+
+      <h2>Продажа автомобиля</h2>
+    </div>
+
+    <div class="accordion help-accordion" id="listingAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#listingOne"
+          >
+            Как подать объявление?
+          </button>
+        </h2>
+
+        <div
+          id="listingOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#listingAccordion"
+        >
+          <div class="accordion-body">
+            Сначала войдите в аккаунт. Затем нажмите кнопку «Подать объявление».
+            Заполните данные автомобиля: марку, модель, год выпуска, пробег,
+            цену и фотографии.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#listingTwo"
+          >
+            Где находятся мои объявления?
+          </button>
+        </h2>
+
+        <div
+          id="listingTwo"
+          class="accordion-collapse collapse"
+          data-bs-parent="#listingAccordion"
+        >
+          <div class="accordion-body">
+            Все ваши объявления отображаются в личном кабинете в разделе «Мои
+            объявления».
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#listingThree"
+          >
+            Можно ли изменить объявление?
+          </button>
+        </h2>
+
+        <div
+          id="listingThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#listingAccordion"
+        >
+          <div class="accordion-body">
+            Да. В разделе «Мои объявления» рядом с автомобилем будет доступна
+            кнопка редактирования.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФОТО -->
+  <section class="help-section help-info-section" id="photos">
+    <div class="help-info-icon">
+      <i class="bi bi-camera-fill"></i>
+    </div>
+
+    <div>
+      <span>ФОТОГРАФИИ</span>
+
+      <h2>Какие фотографии лучше добавлять?</h2>
+
+      <p>
+        Используйте чёткие фотографии автомобиля при хорошем освещении.
+        Желательно показать автомобиль спереди, сзади, с обеих сторон, салон и
+        основные элементы кузова.
+      </p>
+
+      <div class="help-tags">
+        <span>
+          <i class="bi bi-check-lg"></i>
+          Хорошее освещение
+        </span>
+
+        <span>
+          <i class="bi bi-check-lg"></i>
+          Чистый автомобиль
+        </span>
+
+        <span>
+          <i class="bi bi-check-lg"></i>
+          Несколько ракурсов
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЕЗОПАСНОСТЬ -->
+  <section class="help-section help-security" id="security">
+    <div>
+      <span>БЕЗОПАСНОСТЬ</span>
+
+      <h2>Не переводите деньги до проверки автомобиля</h2>
+
+      <p>
+        Перед покупкой лично осмотрите автомобиль, проверьте документы и
+        убедитесь, что продавец действительно имеет право распоряжаться
+        автомобилем.
+      </p>
+    </div>
+
+    <a href="{% url 'core:security' %}" class="help-security-btn">
+      <i class="bi bi-shield-check"></i>
+      Подробнее о безопасности
+    </a>
+  </section>
+
+  <!-- CTA -->
+  <section class="help-cta">
+    <div>
+      <span> MANASAUTO </span>
+
+      <h2>Не нашли ответ?</h2>
+
+      <p>
+        Вы можете вернуться на главную страницу или посмотреть раздел
+        безопасности.
+      </p>
+    </div>
+
+    <div class="help-cta-actions">
+      <a href="{% url 'core:home' %}" class="help-btn help-btn-light">
+        <i class="bi bi-house"></i>
+        На главную
+      </a>
+
+      <a href="{% url 'core:security' %}" class="help-btn help-btn-primary">
+        <i class="bi bi-shield-check"></i>
+        Безопасность
+      </a>
+    </div>
+  </section>
+</section>
+
+{% endblock %}

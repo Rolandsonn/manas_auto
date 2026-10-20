@@ -1,0 +1,200 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/create_listing.css' %}?v=3" />
+
+<section class="create-listing-page">
+  <div class="container">
+    <div class="create-listing-card">
+      <!-- Заголовок -->
+      <div class="create-listing-header">
+        <a href="{% url 'registration:profile' %}" class="create-listing-back">
+          <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <div>
+          <h1>Подать объявление</h1>
+
+          <p>Заполните информацию об автомобиле</p>
+        </div>
+      </div>
+
+      <!-- Сообщения -->
+      {% if messages %}
+
+      <div class="listing-messages">
+        {% for message in messages %}
+
+        <div class="listing-message {{ message.tags }}">{{ message }}</div>
+
+        {% endfor %}
+      </div>
+
+      {% endif %}
+
+      <!-- Ошибки формы -->
+      {% if form.errors %}
+
+      <div class="listing-errors">
+        {% for field in form %} {% for error in field.errors %}
+
+        <p>{{ error }}</p>
+
+        {% endfor %} {% endfor %}
+      </div>
+
+      {% endif %}
+
+      <form
+        method="POST"
+        enctype="multipart/form-data"
+        class="create-listing-form"
+      >
+        {% csrf_token %}
+
+        <!-- Категория -->
+        <div class="listing-field listing-field-full">
+          <label for="{{ form.category.id_for_label }}"> Категория </label>
+
+          {{ form.category }}
+        </div>
+
+        <!-- Заголовок -->
+        <div class="listing-field listing-field-full">
+          <label for="{{ form.title.id_for_label }}">
+            Заголовок объявления
+          </label>
+
+          {{ form.title }}
+
+          <small> Например: Toyota Camry 2020 в отличном состоянии </small>
+        </div>
+
+        <!-- Марка -->
+        <div class="listing-field">
+          <label for="{{ form.brand.id_for_label }}"> Марка </label>
+
+          {{ form.brand }}
+        </div>
+
+        <!-- Модель -->
+        <div class="listing-field">
+          <label for="{{ form.car_model.id_for_label }}"> Модель </label>
+
+          {{ form.car_model }}
+        </div>
+
+        <!-- Год -->
+        <div class="listing-field">
+          <label for="{{ form.year.id_for_label }}"> Год выпуска </label>
+
+          {{ form.year }}
+        </div>
+
+        <!-- Пробег -->
+        <div class="listing-field">
+          <label for="{{ form.mileage.id_for_label }}"> Пробег </label>
+
+          <div class="listing-input-unit">
+            {{ form.mileage }}
+
+            <span>км</span>
+          </div>
+        </div>
+
+        <!-- Цена -->
+        <div class="listing-field listing-field-full">
+          <label for="{{ form.price.id_for_label }}"> Цена </label>
+
+          <div class="listing-input-unit">
+            {{ form.price }}
+
+            <span>сом</span>
+          </div>
+        </div>
+
+        <!-- Фото -->
+        <div class="listing-field listing-field-full">
+          <label for="images"> Фотографии автомобиля </label>
+
+          <div class="listing-upload">
+            <i class="bi bi-images"></i>
+
+            <h3>Добавьте фотографии</h3>
+
+            <p>Первая фотография будет главной</p>
+
+            <label for="images" class="listing-upload-button">
+              <i class="bi bi-camera"></i>
+
+              Выбрать фотографии
+            </label>
+
+            <input
+              type="file"
+              id="images"
+              name="images"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              required
+            />
+
+            <small> Максимум 10 фотографий </small>
+          </div>
+
+          <!-- Здесь появится предпросмотр -->
+          <div id="image-preview" class="listing-image-preview"></div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="listing-form-actions">
+          <a href="{% url 'registration:profile' %}" class="listing-cancel-btn">
+            Отмена
+          </a>
+
+          <button type="submit" class="listing-submit-btn">
+            <i class="bi bi-check-lg"></i>
+
+            Опубликовать объявление
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const imageInput = document.getElementById("images");
+  const imagePreview = document.getElementById("image-preview");
+
+  imageInput.addEventListener("change", function () {
+    imagePreview.innerHTML = "";
+
+    const files = Array.from(this.files);
+
+    files.slice(0, 10).forEach((file, index) => {
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        const item = document.createElement("div");
+
+        item.classList.add("listing-preview-item");
+
+        item.innerHTML = `
+          <img src="${event.target.result}" alt="Фото автомобиля">
+
+          ${
+            index === 0
+              ? '<span class="main-photo-label">Главное фото</span>'
+              : ""
+          }
+        `;
+
+        imagePreview.appendChild(item);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  });
+</script>
+
+{% endblock %}

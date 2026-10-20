@@ -1,0 +1,280 @@
+{% extends "base.html" %} {% load static %} {% block title %} Контакты —
+ManasAuto {% endblock %} {% block description %} Связаться с командой ManasAuto.
+{% endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/contacts.css' %}?v=1" />
+
+<section class="contacts-page">
+  <!-- HERO -->
+  <section class="contacts-hero">
+    <div class="contacts-hero-content">
+      <span class="contacts-badge">
+        <i class="bi bi-chat-dots"></i>
+        Связаться с нами
+      </span>
+
+      <h1>
+        Есть вопрос?
+        <span>Мы готовы помочь</span>
+      </h1>
+
+      <p>
+        Если у вас возникли вопросы по работе ManasAuto, размещению объявлений
+        или вашему аккаунту — свяжитесь с нами удобным способом.
+      </p>
+    </div>
+
+    <div class="contacts-hero-icon">
+      <i class="bi bi-headset"></i>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ -->
+  <section class="contacts-section">
+    <div class="contacts-heading">
+      <span>КОНТАКТЫ</span>
+
+      <h2>Как с нами связаться</h2>
+
+      <p>Выберите удобный способ связи с командой ManasAuto.</p>
+    </div>
+
+    <div class="contacts-grid">
+      <!-- Телефон -->
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <i class="bi bi-telephone-fill"></i>
+        </div>
+
+        <span class="contact-card-label"> Телефон </span>
+
+        <h3>+996 XXX XX XX XX</h3>
+
+        <p>По вопросам работы сайта</p>
+
+        <a href="tel:+996XXXXXXXXX">
+          Позвонить
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <i class="bi bi-whatsapp"></i>
+        </div>
+
+        <span class="contact-card-label"> WhatsApp </span>
+
+        <h3>+996 XXX XX XX XX</h3>
+
+        <p>Напишите нам в WhatsApp</p>
+
+        <a href="#" target="_blank">
+          Написать
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <i class="bi bi-envelope-fill"></i>
+        </div>
+
+        <span class="contact-card-label"> Email </span>
+
+        <h3>info@manasauto.kg</h3>
+
+        <p>Для общих вопросов</p>
+
+        <a href="mailto:info@manasauto.kg">
+          Написать
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Регион -->
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <i class="bi bi-geo-alt-fill"></i>
+        </div>
+
+        <span class="contact-card-label"> Регион </span>
+
+        <h3>Жалал-Абадская область</h3>
+
+        <p>Кыргызстан</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM + INFO -->
+  <section class="contacts-main">
+    <!-- ФОРМА -->
+    <div class="contacts-form-card">
+      <div class="contacts-form-header">
+        <span> ОБРАТНАЯ СВЯЗЬ </span>
+
+        <h2>Напишите нам</h2>
+
+        <p>Заполните форму, и мы рассмотрим ваше обращение.</p>
+      </div>
+
+      {% if messages %}
+
+      <div class="contact-messages">
+        {% for message in messages %}
+
+        <div class="contact-message {{ message.tags }}">{{ message }}</div>
+
+        {% endfor %}
+      </div>
+
+      {% endif %}
+
+      <form
+        action="{% url 'core:contacts' %}"
+        method="POST"
+        class="contact-form"
+      >
+        {% csrf_token %}
+
+        <div class="contact-form-row">
+          <div class="contact-field">
+            <label for="name"> Имя </label>
+
+            <div class="contact-input">
+              <i class="bi bi-person"></i>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Ваше имя"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="contact-field">
+            <label for="email"> Email </label>
+
+            <div class="contact-input">
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@gmail.com"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-field">
+          <label for="subject"> Тема </label>
+
+          <div class="contact-input">
+            <i class="bi bi-chat-left-text"></i>
+
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Например: проблема с объявлением"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="contact-field">
+          <label for="message"> Сообщение </label>
+
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Опишите ваш вопрос..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="contact-submit">
+          <i class="bi bi-send-fill"></i>
+          Отправить сообщение
+        </button>
+      </form>
+    </div>
+
+    <!-- ПРАВАЯ ЧАСТЬ -->
+    <aside class="contacts-info">
+      <div class="contacts-info-card">
+        <div class="contacts-info-icon">
+          <i class="bi bi-clock-fill"></i>
+        </div>
+
+        <h3>Время работы</h3>
+
+        <div class="contacts-hours">
+          <div>
+            <span>Понедельник – Пятница</span>
+            <strong>09:00 – 18:00</strong>
+          </div>
+
+          <div>
+            <span>Суббота</span>
+            <strong>10:00 – 16:00</strong>
+          </div>
+
+          <div>
+            <span>Воскресенье</span>
+            <strong>Выходной</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacts-info-card">
+        <div class="contacts-info-icon">
+          <i class="bi bi-share-fill"></i>
+        </div>
+
+        <h3>Мы в социальных сетях</h3>
+
+        <p>Следите за новостями ManasAuto.</p>
+
+        <div class="contacts-social">
+          <a href="#" aria-label="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="Telegram">
+            <i class="bi bi-telegram"></i>
+          </a>
+
+          <a href="#" aria-label="WhatsApp">
+            <i class="bi bi-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="contacts-help-card">
+        <i class="bi bi-question-circle-fill"></i>
+
+        <div>
+          <h3>Возможно, ответ уже есть</h3>
+
+          <p>Посмотрите ответы на частые вопросы.</p>
+
+          <a href="{% url 'core:help' %}">
+            Перейти в помощь
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+  </section>
+</section>
+
+{% endblock %}

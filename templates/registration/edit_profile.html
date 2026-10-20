@@ -1,0 +1,150 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}?v=3" />
+
+<section class="profile-page">
+  <div class="container">
+    <div class="edit-profile-card">
+      <div class="edit-profile-header">
+        <a href="{% url 'registration:profile' %}" class="edit-profile-back">
+          <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <div>
+          <h1>Редактирование профиля</h1>
+          <p>Измените личные данные вашего аккаунта</p>
+        </div>
+      </div>
+
+      <!-- Django messages -->
+      {% if messages %}
+      <div class="profile-messages">
+        {% for message in messages %}
+        <div class="profile-message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <form
+        action="{% url 'registration:edit_profile' %}"
+        method="POST"
+        enctype="multipart/form-data"
+        class="edit-profile-form"
+      >
+        {% csrf_token %}
+
+        <!-- Аватар -->
+        <div class="edit-profile-avatar">
+          <div class="edit-avatar-preview">
+            {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="{{ user.username }}" />
+            {% else %}
+            <i class="bi bi-person-fill"></i>
+            {% endif %}
+          </div>
+
+          <div class="edit-avatar-content">
+            <label for="avatar"> Фотография профиля </label>
+
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/jpeg,image/png,image/webp"
+            />
+
+            <small> JPG, PNG или WEBP </small>
+          </div>
+        </div>
+
+        <!-- Имя -->
+        <div class="edit-profile-field">
+          <label for="first_name">Имя</label>
+
+          <div class="edit-profile-input">
+            <i class="bi bi-person"></i>
+
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              value="{{ user.first_name }}"
+              placeholder="Введите имя"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Фамилия -->
+        <div class="edit-profile-field">
+          <label for="last_name">Фамилия</label>
+
+          <div class="edit-profile-input">
+            <i class="bi bi-person"></i>
+
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              value="{{ user.last_name }}"
+              placeholder="Введите фамилию"
+            />
+          </div>
+        </div>
+
+        <!-- Логин -->
+        <div class="edit-profile-field">
+          <label for="username">Логин</label>
+
+          <div class="edit-profile-input">
+            <i class="bi bi-at"></i>
+
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="{{ user.username }}"
+              placeholder="Введите логин"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="edit-profile-field">
+          <label for="email">Email</label>
+
+          <div class="edit-profile-input">
+            <i class="bi bi-envelope"></i>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="{{ user.email }}"
+              placeholder="example@gmail.com"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="edit-profile-actions">
+          <a
+            href="{% url 'registration:profile' %}"
+            class="edit-profile-cancel"
+          >
+            Отмена
+          </a>
+
+          <button type="submit" class="edit-profile-save">
+            <i class="bi bi-check-lg"></i>
+            Сохранить изменения
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

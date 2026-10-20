@@ -1,0 +1,250 @@
+<!-- templates/registration/register.html -->
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Регистрация — ManasAuto
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+  <div
+    class="card shadow-sm border-0 mx-auto"
+    style="max-width: 650px;"
+  >
+
+    <div class="card-body p-4 p-md-5">
+
+      <h1 class="h3 fw-bold mb-2">
+        Создать аккаунт
+      </h1>
+
+      <p class="text-muted mb-4">
+        После заполнения формы мы подтвердим ваш номер телефона.
+      </p>
+
+
+      {% if messages %}
+
+        {% for message in messages %}
+
+          <div class="alert alert-danger">
+            {{ message }}
+          </div>
+
+        {% endfor %}
+
+      {% endif %}
+
+
+      <form
+        method="POST"
+        action="{% url 'registration:register' %}"
+      >
+
+        {% csrf_token %}
+
+
+        <div class="row g-3">
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Имя
+            </label>
+
+            <input
+              type="text"
+              name="first_name"
+              class="form-control"
+              value="{{ first_name|default:'' }}"
+              required
+            />
+
+          </div>
+
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Фамилия
+            </label>
+
+            <input
+              type="text"
+              name="last_name"
+              class="form-control"
+              value="{{ last_name|default:'' }}"
+            />
+
+          </div>
+
+
+          <div class="col-12">
+
+            <label class="form-label">
+              Логин
+            </label>
+
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              value="{{ username|default:'' }}"
+              required
+            />
+
+          </div>
+
+
+          <div class="col-12">
+
+            <label class="form-label">
+              Email
+            </label>
+
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              value="{{ email|default:'' }}"
+              required
+            />
+
+          </div>
+
+
+          <div class="col-12">
+
+            <label class="form-label">
+              Номер телефона
+            </label>
+
+            <input
+              type="tel"
+              name="phone"
+              class="form-control"
+              value="{{ phone|default:'' }}"
+              placeholder="+996 555 123 456"
+              required
+            />
+
+            <div class="form-text">
+              На этот номер будет отправлен 4-значный код.
+            </div>
+
+          </div>
+
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Пароль
+            </label>
+
+            <input
+              type="password"
+              name="password1"
+              class="form-control"
+              required
+            />
+
+          </div>
+
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Повторите пароль
+            </label>
+
+            <input
+              type="password"
+              name="password2"
+              class="form-control"
+              required
+            />
+
+          </div>
+
+
+          <div class="col-12">
+
+            <div class="form-check">
+
+              <input
+                type="checkbox"
+                name="agreement"
+                value="1"
+                class="form-check-input"
+                id="agreement"
+                required
+                {% if agreement %}checked{% endif %}
+              />
+
+              <label
+                class="form-check-label"
+                for="agreement"
+              >
+
+                Я принимаю
+
+                <a
+                  href="{% url 'core:terms' %}"
+                  target="_blank"
+                >
+                  Пользовательское соглашение
+                </a>
+
+                и
+
+                <a
+                  href="{% url 'core:privacy' %}"
+                  target="_blank"
+                >
+                  Политику конфиденциальности
+                </a>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="col-12">
+
+            <button
+              type="submit"
+              class="btn btn-warning w-100 fw-bold py-3"
+            >
+              Получить код подтверждения
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+
+      <div class="text-center mt-4">
+
+        Уже есть аккаунт?
+
+        <a href="{% url 'registration:login' %}">
+          Войти
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

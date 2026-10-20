@@ -1,0 +1,421 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ listing.brand }} {{ listing.car_model }} — ManasAuto
+{% endblock %}
+
+{% block content %}
+
+<link
+  rel="stylesheet"
+  href="{% static 'css/listing_detail.css' %}?v=2"
+/>
+
+<section class="listing-detail-page">
+
+  <!-- НАЗАД -->
+  <div class="listing-back">
+    <a href="{% url 'listings:car_list' %}">
+      <i class="bi bi-arrow-left"></i>
+      Все автомобили
+    </a>
+  </div>
+
+
+  <div class="listing-detail-grid">
+
+    <!-- =====================================
+         ЛЕВАЯ ЧАСТЬ — ФОТО
+    ====================================== -->
+    <div class="listing-gallery">
+
+      <div class="listing-main-image">
+
+        {% with first_image=listing.images.first %}
+
+          {% if first_image %}
+
+            <img
+              id="mainCarImage"
+              src="{{ first_image.image.url }}"
+              alt="{{ listing.brand }} {{ listing.car_model }}"
+            />
+
+          {% else %}
+
+            <div class="listing-no-image">
+              <i class="bi bi-car-front-fill"></i>
+
+              <span>
+                Фото автомобиля отсутствует
+              </span>
+            </div>
+
+          {% endif %}
+
+        {% endwith %}
+
+
+        <!-- TOP -->
+        {% if listing.top_active %}
+
+          <div class="listing-top-badge">
+            <i class="bi bi-lightning-fill"></i>
+            TOP
+          </div>
+
+        {% endif %}
+
+
+        <!-- ПРОСМОТРЫ -->
+        <div class="listing-views-badge">
+          <i class="bi bi-eye-fill"></i>
+
+          <span>
+            {{ listing.views_count }}
+          </span>
+        </div>
+
+
+        <!-- ИЗБРАННОЕ -->
+        <button
+          type="button"
+          class="listing-favorite"
+          aria-label="Добавить в избранное"
+        >
+          <i class="bi bi-heart"></i>
+        </button>
+
+      </div>
+
+
+      <!-- МИНИАТЮРЫ -->
+      {% if listing.images.exists %}
+
+        <div class="listing-thumbnails">
+
+          {% for photo in listing.images.all %}
+
+            <button
+              type="button"
+              class="listing-thumbnail {% if forloop.first %}active{% endif %}"
+              data-image="{{ photo.image.url }}"
+            >
+
+              <img
+                src="{{ photo.image.url }}"
+                alt="Фото {{ forloop.counter }}"
+              />
+
+            </button>
+
+          {% endfor %}
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+
+    <!-- =====================================
+         ПРАВАЯ ЧАСТЬ
+    ====================================== -->
+    <div class="listing-info">
+
+      <!-- ДАТА -->
+      <div class="listing-date">
+        <i class="bi bi-calendar3"></i>
+
+        Опубликовано:
+        {{ listing.created_at|date:"d.m.Y" }}
+      </div>
+
+
+      <!-- ЗАГОЛОВОК -->
+      <h1>
+
+        {% if listing.title %}
+
+          {{ listing.title }}
+
+        {% else %}
+
+          {{ listing.brand }} {{ listing.car_model }}
+
+        {% endif %}
+
+      </h1>
+
+
+      <!-- ЦЕНА -->
+      <div class="listing-price">
+        {{ listing.price|floatformat:0 }} сом
+      </div>
+
+
+      <!-- ХАРАКТЕРИСТИКИ -->
+      <div class="listing-specs">
+
+        <div class="listing-spec">
+
+          <div class="listing-spec-icon">
+            <i class="bi bi-car-front-fill"></i>
+          </div>
+
+          <div>
+            <span>Марка</span>
+
+            <strong>
+              {{ listing.brand }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="listing-spec">
+
+          <div class="listing-spec-icon">
+            <i class="bi bi-car-front"></i>
+          </div>
+
+          <div>
+            <span>Модель</span>
+
+            <strong>
+              {{ listing.car_model }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="listing-spec">
+
+          <div class="listing-spec-icon">
+            <i class="bi bi-calendar3"></i>
+          </div>
+
+          <div>
+            <span>Год выпуска</span>
+
+            <strong>
+              {{ listing.year }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="listing-spec">
+
+          <div class="listing-spec-icon">
+            <i class="bi bi-speedometer2"></i>
+          </div>
+
+          <div>
+            <span>Пробег</span>
+
+            <strong>
+              {{ listing.mileage }} км
+            </strong>
+          </div>
+
+        </div>
+
+
+        {% if listing.category %}
+
+          <div class="listing-spec">
+
+            <div class="listing-spec-icon">
+              <i class="bi bi-grid"></i>
+            </div>
+
+            <div>
+              <span>Категория</span>
+
+              <strong>
+                {{ listing.category.name }}
+              </strong>
+            </div>
+
+          </div>
+
+        {% endif %}
+
+
+        <div class="listing-spec">
+
+          <div class="listing-spec-icon">
+            <i class="bi bi-eye"></i>
+          </div>
+
+          <div>
+            <span>Просмотры</span>
+
+            <strong>
+              {{ listing.views_count }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           ПРОДАВЕЦ
+      ====================================== -->
+      <div class="listing-seller">
+
+        <div class="listing-seller-title">
+          Продавец
+        </div>
+
+
+        <div class="listing-seller-user">
+
+          <div class="listing-seller-avatar">
+
+            {% if listing.owner.profile.avatar %}
+
+              <img
+                src="{{ listing.owner.profile.avatar.url }}"
+                alt="{{ listing.owner.username }}"
+              />
+
+            {% else %}
+
+              <i class="bi bi-person-fill"></i>
+
+            {% endif %}
+
+          </div>
+
+
+          <div class="listing-seller-name">
+
+            <strong>
+
+              {% if listing.owner.first_name %}
+
+                {{ listing.owner.first_name }}
+
+                {% if listing.owner.last_name %}
+                  {{ listing.owner.last_name }}
+                {% endif %}
+
+              {% else %}
+
+                {{ listing.owner.username }}
+
+              {% endif %}
+
+            </strong>
+
+            <span>
+              Пользователь ManasAuto
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ТЕЛЕФОН -->
+        {% if listing.owner.profile.phone %}
+
+          <a
+            href="tel:{{ listing.owner.profile.phone }}"
+            class="seller-phone"
+          >
+            <i class="bi bi-telephone-fill"></i>
+
+            {{ listing.owner.profile.phone }}
+          </a>
+
+        {% endif %}
+
+{% if listing.owner.profile.phone %}
+
+  <a
+    href="https://wa.me/{{ listing.owner.profile.whatsapp_phone }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="seller-message"
+  >
+    <i class="bi bi-whatsapp"></i>
+    Написать в WhatsApp
+  </a>
+
+{% endif %}
+      </div>
+
+
+      <!-- БЕЗОПАСНОСТЬ -->
+      <div class="listing-security">
+
+        <i class="bi bi-shield-check"></i>
+
+        <div>
+
+          <strong>
+            Будьте внимательны
+          </strong>
+
+          <p>
+            Не переводите предоплату до осмотра автомобиля
+            и проверки документов.
+          </p>
+
+          <a href="{% url 'core:security' %}">
+            Подробнее о безопасности
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const mainImage = document.getElementById("mainCarImage");
+
+    const thumbnails = document.querySelectorAll(
+      ".listing-thumbnail"
+    );
+
+    thumbnails.forEach(function (thumbnail) {
+
+      thumbnail.addEventListener("click", function () {
+
+        const imageUrl = this.dataset.image;
+
+        if (mainImage && imageUrl) {
+          mainImage.src = imageUrl;
+        }
+
+        thumbnails.forEach(function (item) {
+          item.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+      });
+
+    });
+
+  });
+</script>
+
+{% endblock %}

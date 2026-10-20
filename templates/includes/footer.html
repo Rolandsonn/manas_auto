@@ -1,0 +1,164 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Верхняя часть футера -->
+    <div class="footer-grid">
+      <!-- Логотип / описание -->
+      <div class="footer-brand">
+        <a href="{% url 'core:home' %}" class="footer-logo">
+          Manas<span>Auto</span>
+        </a>
+
+        <p class="footer-description">
+          Удобная площадка для покупки и продажи автомобилей в Жалал-Абадской
+          области.
+        </p>
+
+        <div class="footer-location">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>Жалал-Абадская область</span>
+        </div>
+      </div>
+
+      <!-- Покупателям -->
+      <div class="footer-column">
+        <h5>Покупателям</h5>
+
+        <ul>
+          <!-- Пока ведём на главную, где выводятся автомобили -->
+          <li>
+            <a href="{% url 'core:home' %}"> Все автомобили </a>
+          </li>
+
+          <!-- Пока отдельного URL для новых нет -->
+          <li>
+            <a href="{% url 'core:home' %}"> Новые объявления </a>
+          </li>
+
+          <!-- Пока отдельного URL для ТОП нет -->
+          <li>
+            <a href="{% url 'core:home' %}"> ТОП объявления </a>
+          </li>
+
+          <!-- Избранное пока отдельной страницей не сделали -->
+          <li>
+            {% if user.is_authenticated %}
+            <a href="{% url 'registration:profile' %}"> Избранное </a>
+            {% else %}
+            <a href="{% url 'registration:login' %}"> Избранное </a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Продавцам -->
+      <div class="footer-column">
+        <h5>Продавцам</h5>
+
+        <ul>
+          <!-- Подать объявление -->
+          <li>
+            <a href="{% url 'core:create_listing' %}"> Подать объявление </a>
+          </li>
+
+          <!-- Мои объявления -->
+          <li>
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'registration:profile' %}#my-listings">
+              Мои объявления
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'registration:login' %}"> Мои объявления </a>
+
+            {% endif %}
+          </li>
+
+          <!-- Продвижение пока не реализовано -->
+          <li>
+            <a href="#"> Продвижение </a>
+          </li>
+
+          <!-- Пока используем пользовательское соглашение -->
+          <li>
+            <a href="{% url 'core:terms' %}"> Правила размещения </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- О проекте -->
+      <div class="footer-column">
+        <h5>ManasAuto</h5>
+
+        <ul>
+          <li>
+            <a href="{% url 'core:about' %}"> О проекте </a>
+          </li>
+
+          <li>
+            <a href="{% url 'core:security' %}"> Безопасность </a>
+          </li>
+
+          <li>
+            <a href="{% url 'core:help' %}"> Помощь </a>
+          </li>
+
+          <li>
+            <a href="{% url 'core:contacts' %}"> Контакты </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Социальные сети -->
+      <div class="footer-column footer-contact">
+        <h5>Мы в соцсетях</h5>
+
+        <p>Следите за новыми автомобилями и обновлениями проекта.</p>
+
+        <div class="footer-socials">
+          <!-- Здесь потом поставим настоящий Instagram -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+
+          <!-- Здесь потом поставим настоящий Telegram -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram"
+          >
+            <i class="bi bi-telegram"></i>
+          </a>
+
+          <!-- Здесь потом поставим настоящий WhatsApp -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
+            <i class="bi bi-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Нижняя часть -->
+    <div class="footer-bottom">
+      <p>© {% now "Y" %} ManasAuto. Все права защищены.</p>
+
+      <div class="footer-bottom-links">
+        <a href="{% url 'core:terms' %}"> Пользовательское соглашение </a>
+
+        <a href="{% url 'core:privacy' %}"> Политика конфиденциальности </a>
+      </div>
+    </div>
+  </div>
+</footer>

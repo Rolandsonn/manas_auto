@@ -1,0 +1,226 @@
+{% extends "base.html" %} {% load static %} {% block title %} {{ page_title }} —
+ManasAuto {% endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/car_list.css' %}?v=3" />
+
+<section class="cars-page">
+  <!-- HEADER -->
+  <div class="cars-page-header">
+    <div>
+      {% if page_type == "top" %}
+
+      <span class="cars-page-badge top">
+        <i class="bi bi-lightning-fill"></i>
+        TOP
+      </span>
+
+      {% elif page_type == "new" %}
+
+      <span class="cars-page-badge">
+        <i class="bi bi-stars"></i>
+        НОВЫЕ
+      </span>
+
+      {% else %}
+
+      <span class="cars-page-badge">
+        <i class="bi bi-car-front-fill"></i>
+        MANASAUTO
+      </span>
+
+      {% endif %}
+
+      <h1>{{ page_title }}</h1>
+
+      <p>{{ page_subtitle }}</p>
+    </div>
+
+    <div class="cars-total">
+      <strong> {{ listings|length }} </strong>
+
+      <span> объявлений </span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="cars-tabs">
+    <a
+      href="{% url 'listings:car_list' %}"
+      class="{% if page_type == 'all' %}active{% endif %}"
+    >
+      <i class="bi bi-car-front"></i>
+      Все автомобили
+    </a>
+
+    <a
+      href="{% url 'listings:new_cars' %}"
+      class="{% if page_type == 'new' %}active{% endif %}"
+    >
+      <i class="bi bi-stars"></i>
+      Новые
+    </a>
+
+    <a
+      href="{% url 'listings:top_cars' %}"
+      class="{% if page_type == 'top' %}active{% endif %}"
+    >
+      <i class="bi bi-lightning-fill"></i>
+      ТОП
+    </a>
+  </div>
+
+  <!-- CARS -->
+  {% if listings %}
+
+  <div class="cars-grid">
+    {% for listing in listings %}
+
+    <article class="car-card">
+      <!--
+            Эта ссылка растягивается
+            на всю карточку
+          -->
+      <a
+        href="{% url 'listings:detail' listing.pk %}"
+        class="car-card-overlay-link"
+        aria-label="Открыть {{ listing.brand }} {{ listing.car_model }}"
+      ></a>
+
+      <!-- PHOTO -->
+      <div class="car-card-image">
+        {% with first_image=listing.images.first %} {% if first_image %}
+
+        <img
+          src="{{ first_image.image.url }}"
+          alt="{{ listing.brand }} {{ listing.car_model }}"
+        />
+
+        {% else %}
+
+        <div class="car-card-placeholder">
+          <i class="bi bi-car-front-fill"></i>
+        </div>
+
+        {% endif %} {% endwith %}
+
+        <!-- TOP -->
+        {% if listing.top_active %}
+
+        <span class="car-top-label">
+          <i class="bi bi-lightning-fill"></i>
+
+          TOP
+        </span>
+
+        {% endif %}
+
+        <!-- ПРОСМОТРЫ -->
+        <div class="car-views">
+          <i class="bi bi-eye-fill"></i>
+
+          <span> {{ listing.views_count }} </span>
+        </div>
+
+        <!-- ИЗБРАННОЕ -->
+        <button
+          type="button"
+          class="car-favorite-btn"
+          aria-label="Добавить в избранное"
+        >
+          <i class="bi bi-heart"></i>
+        </button>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="car-card-content">
+        <h2>
+          {% if listing.title %} {{ listing.title }} {% else %} {{ listing.brand
+          }} {{ listing.car_model }} {% endif %}
+        </h2>
+
+        <div class="car-card-info">
+          {% if listing.brand %}
+
+          <span>
+            <i class="bi bi-car-front"></i>
+            {{ listing.brand }}
+          </span>
+
+          {% endif %} {% if listing.year %}
+
+          <span>
+            <i class="bi bi-calendar3"></i>
+            {{ listing.year }}
+          </span>
+
+          {% endif %} {% if listing.mileage %}
+
+          <span>
+            <i class="bi bi-speedometer2"></i>
+            {{ listing.mileage }} км
+          </span>
+
+          {% endif %}
+        </div>
+
+        <div class="car-card-bottom">
+          <strong class="car-price">
+            {{ listing.price|floatformat:0 }} сом
+          </strong>
+
+          <span class="car-date"> {{ listing.created_at|date:"d.m.Y" }} </span>
+        </div>
+      </div>
+    </article>
+
+    {% endfor %}
+  </div>
+
+  {% else %}
+
+  <div class="cars-empty">
+    <div class="cars-empty-icon">
+      {% if page_type == "top" %}
+
+      <i class="bi bi-lightning"></i>
+
+      {% elif page_type == "new" %}
+
+      <i class="bi bi-stars"></i>
+
+      {% else %}
+
+      <i class="bi bi-car-front"></i>
+
+      {% endif %}
+    </div>
+
+    <h2>Объявлений пока нет</h2>
+
+    {% if page_type == "top" %}
+
+    <p>Сейчас нет автомобилей в разделе ТОП.</p>
+
+    {% elif page_type == "new" %}
+
+    <p>За последние 7 дней новых объявлений пока нет.</p>
+
+    {% else %}
+
+    <p>Станьте первым, кто разместит автомобиль.</p>
+
+    {% endif %} {% if user.is_authenticated %}
+
+    <a href="{% url 'core:create_listing' %}" class="cars-add-btn">
+      <i class="bi bi-plus-lg"></i>
+
+      Подать объявление
+    </a>
+
+    {% endif %}
+  </div>
+
+  {% endif %}
+</section>
+
+{% endblock %}

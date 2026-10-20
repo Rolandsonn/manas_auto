@@ -1,0 +1,318 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}?v=1" />
+
+<section class="about-page">
+  <!-- HERO -->
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <span class="about-badge">
+        <i class="bi bi-car-front-fill"></i>
+        О проекте
+      </span>
+
+      <h1>
+        Покупайте и продавайте автомобили
+        <span>легко с ManasAuto</span>
+      </h1>
+
+      <p>
+        ManasAuto — удобная площадка для размещения и поиска объявлений об
+        автомобилях в Жалал-Абадской области.
+      </p>
+
+      <div class="about-hero-actions">
+        <a href="{% url 'core:home' %}" class="about-btn about-btn-dark">
+          <i class="bi bi-search"></i>
+          Смотреть автомобили
+        </a>
+
+        {% if user.is_authenticated %}
+
+        <a
+          href="{% url 'core:create_listing' %}"
+          class="about-btn about-btn-primary"
+        >
+          <i class="bi bi-plus-lg"></i>
+          Подать объявление
+        </a>
+
+        {% else %}
+
+        <a
+          href="{% url 'registration:register' %}"
+          class="about-btn about-btn-primary"
+        >
+          <i class="bi bi-person-plus"></i>
+          Зарегистрироваться
+        </a>
+
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="about-hero-visual">
+      <div class="about-car-icon">
+        <i class="bi bi-car-front-fill"></i>
+      </div>
+
+      <div class="about-floating-card about-floating-one">
+        <i class="bi bi-check-circle-fill"></i>
+
+        <div>
+          <strong>Просто</strong>
+          <span>Разместить объявление</span>
+        </div>
+      </div>
+
+      <div class="about-floating-card about-floating-two">
+        <i class="bi bi-images"></i>
+
+        <div>
+          <strong>Удобно</strong>
+          <span>Добавить фотографии</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- О ПРОЕКТЕ -->
+  <section class="about-section">
+    <div class="about-section-heading">
+      <span>MANASAUTO</span>
+
+      <h2>Для чего мы создаём этот проект?</h2>
+
+      <p>
+        Мы хотим сделать поиск и продажу автомобилей понятнее и удобнее для
+        жителей региона.
+      </p>
+    </div>
+
+    <div class="about-description-grid">
+      <div class="about-description-card">
+        <div class="about-description-icon">
+          <i class="bi bi-geo-alt-fill"></i>
+        </div>
+
+        <div>
+          <h3>Местная площадка</h3>
+
+          <p>
+            ManasAuto ориентирован на автомобили и пользователей Жалал-Абадской
+            области, чтобы продавцу и покупателю было проще найти друг друга.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-description-card">
+        <div class="about-description-icon">
+          <i class="bi bi-phone"></i>
+        </div>
+
+        <div>
+          <h3>Удобное использование</h3>
+
+          <p>
+            Мы стремимся сделать сайт простым: найти автомобиль, посмотреть
+            информацию, фотографии и связаться с продавцом без лишних действий.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВОЗМОЖНОСТИ -->
+  <section class="about-section about-features-section">
+    <div class="about-section-heading">
+      <span>ВОЗМОЖНОСТИ</span>
+
+      <h2>Что можно делать на ManasAuto</h2>
+    </div>
+
+    <div class="about-features">
+      <!-- 1 -->
+      <div class="about-feature-card">
+        <div class="about-feature-number">01</div>
+
+        <div class="about-feature-icon">
+          <i class="bi bi-search"></i>
+        </div>
+
+        <h3>Искать автомобили</h3>
+
+        <p>Просматривайте объявления и находите подходящий автомобиль.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="about-feature-card">
+        <div class="about-feature-number">02</div>
+
+        <div class="about-feature-icon">
+          <i class="bi bi-plus-circle"></i>
+        </div>
+
+        <h3>Размещать объявления</h3>
+
+        <p>
+          Добавляйте информацию об автомобиле, цену, год выпуска, пробег и
+          фотографии.
+        </p>
+      </div>
+
+      <!-- 3 -->
+      <div class="about-feature-card">
+        <div class="about-feature-number">03</div>
+
+        <div class="about-feature-icon">
+          <i class="bi bi-person-circle"></i>
+        </div>
+
+        <h3>Личный кабинет</h3>
+
+        <p>Управляйте профилем и своими объявлениями через личный кабинет.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="about-feature-card">
+        <div class="about-feature-number">04</div>
+
+        <div class="about-feature-icon">
+          <i class="bi bi-heart"></i>
+        </div>
+
+        <h3>Избранное</h3>
+
+        <p>Сохраняйте интересные автомобили, чтобы вернуться к ним позже.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК ЭТО РАБОТАЕТ -->
+  <section class="about-section">
+    <div class="about-section-heading">
+      <span>КАК ЭТО РАБОТАЕТ</span>
+
+      <h2>Продать автомобиль — просто</h2>
+    </div>
+
+    <div class="about-steps">
+      <div class="about-step">
+        <div class="about-step-number">1</div>
+
+        <div class="about-step-content">
+          <h3>Создайте аккаунт</h3>
+
+          <p>
+            Зарегистрируйтесь на сайте и заполните информацию своего профиля.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-step-line"></div>
+
+      <div class="about-step">
+        <div class="about-step-number">2</div>
+
+        <div class="about-step-content">
+          <h3>Добавьте автомобиль</h3>
+
+          <p>
+            Укажите марку, модель, год выпуска, пробег, цену и другие данные.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-step-line"></div>
+
+      <div class="about-step">
+        <div class="about-step-number">3</div>
+
+        <div class="about-step-content">
+          <h3>Загрузите фотографии</h3>
+
+          <p>
+            Добавьте фотографии автомобиля, чтобы покупатель мог его
+            рассмотреть.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-step-line"></div>
+
+      <div class="about-step">
+        <div class="about-step-number">4</div>
+
+        <div class="about-step-content">
+          <h3>Опубликуйте</h3>
+
+          <p>
+            После публикации ваше объявление станет доступно посетителям сайта.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЕЗОПАСНОСТЬ -->
+  <section class="about-safety">
+    <div class="about-safety-icon">
+      <i class="bi bi-shield-check"></i>
+    </div>
+
+    <div class="about-safety-content">
+      <span> БЕЗОПАСНОСТЬ </span>
+
+      <h2>Будьте внимательны при покупке автомобиля</h2>
+
+      <p>
+        ManasAuto предоставляет площадку для размещения объявлений. Перед
+        покупкой рекомендуем лично осмотреть автомобиль, проверить документы и
+        не переводить деньги незнакомому продавцу до проверки автомобиля.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <div>
+      <span class="about-cta-small"> MANASAUTO </span>
+
+      <h2>Найдите свой следующий автомобиль</h2>
+
+      <p>
+        Просматривайте объявления или разместите свой автомобиль прямо сейчас.
+      </p>
+    </div>
+
+    <div class="about-cta-actions">
+      <a href="{% url 'core:home' %}" class="about-btn about-btn-light">
+        <i class="bi bi-car-front"></i>
+        Смотреть автомобили
+      </a>
+
+      {% if user.is_authenticated %}
+
+      <a
+        href="{% url 'core:create_listing' %}"
+        class="about-btn about-btn-primary"
+      >
+        <i class="bi bi-plus-lg"></i>
+        Подать объявление
+      </a>
+
+      {% else %}
+
+      <a
+        href="{% url 'registration:register' %}"
+        class="about-btn about-btn-primary"
+      >
+        Создать аккаунт
+      </a>
+
+      {% endif %}
+    </div>
+  </section>
+</section>
+
+{% endblock %}

@@ -1,0 +1,588 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+ManasAuto — купить и продать автомобиль
+{% endblock %}
+
+{% block description %}
+Продажа автомобилей в Жалал-Абадской области.
+Найдите подходящий автомобиль или разместите свое объявление.
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="home-hero">
+
+  <div class="container">
+
+    <div class="row align-items-center g-5">
+
+      <!-- Левая часть -->
+      <div class="col-lg-6">
+
+        <div class="hero-label">
+          <i class="bi bi-geo-alt-fill"></i>
+          Жалал-Абадская область
+        </div>
+
+        <h1 class="home-hero-title">
+          Найдите автомобиль, который подходит именно вам
+        </h1>
+
+        <p class="home-hero-text">
+          Покупайте и продавайте автомобили удобно,
+          быстро и безопасно вместе с ManasAuto.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a
+            href="{% url 'listings:car_list' %}"
+            class="hero-primary-btn"
+          >
+            <i class="bi bi-car-front-fill"></i>
+            Смотреть автомобили
+          </a>
+
+          <a
+            href="{% url 'core:create_listing' %}"
+            class="hero-secondary-btn"
+          >
+            <i class="bi bi-plus-lg"></i>
+            Добавить объявление
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Правая часть -->
+      <div class="col-lg-6">
+
+        <div class="home-search-card">
+
+          <h3>
+            Найти автомобиль
+          </h3>
+
+          <p>
+            Используйте быстрый поиск
+          </p>
+
+
+          <form
+            action="{% url 'listings:car_list' %}"
+            method="GET"
+          >
+
+            <div class="row g-3">
+
+              <!-- Марка -->
+              <div class="col-md-6">
+
+                <label class="form-label">
+                  Марка
+                </label>
+
+                <input
+                  type="text"
+                  name="brand"
+                  class="form-control home-input"
+                  placeholder="Например Toyota"
+                />
+
+              </div>
+
+
+              <!-- Модель -->
+              <div class="col-md-6">
+
+                <label class="form-label">
+                  Модель
+                </label>
+
+                <input
+                  type="text"
+                  name="car_model"
+                  class="form-control home-input"
+                  placeholder="Например Camry"
+                />
+
+              </div>
+
+
+              <!-- Цена от -->
+              <div class="col-md-6">
+
+                <label class="form-label">
+                  Цена от
+                </label>
+
+                <input
+                  type="number"
+                  name="price_min"
+                  class="form-control home-input"
+                  placeholder="0"
+                />
+
+              </div>
+
+
+              <!-- Цена до -->
+              <div class="col-md-6">
+
+                <label class="form-label">
+                  Цена до
+                </label>
+
+                <input
+                  type="number"
+                  name="price_max"
+                  class="form-control home-input"
+                  placeholder="2 000 000"
+                />
+
+              </div>
+
+
+              <div class="col-12">
+
+                <button
+                  type="submit"
+                  class="home-search-btn"
+                >
+                  <i class="bi bi-search"></i>
+                  Найти автомобиль
+                </button>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     ПРЕИМУЩЕСТВА
+========================================= -->
+
+<section class="home-features">
+
+  <div class="container">
+
+    <div class="row g-3">
+
+
+      <div class="col-lg-4 col-md-6">
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            <i class="bi bi-search"></i>
+          </div>
+
+          <div>
+
+            <h5>
+              Удобный поиск
+            </h5>
+
+            <p>
+              Быстро находите автомобиль
+              по нужным параметрам.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-4 col-md-6">
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            <i class="bi bi-shield-check"></i>
+          </div>
+
+          <div>
+
+            <h5>
+              Безопасность
+            </h5>
+
+            <p>
+              Объявления и пользователи
+              проходят проверку.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-4 col-md-6">
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            <i class="bi bi-lightning-charge"></i>
+          </div>
+
+          <div>
+
+            <h5>
+              Быстрая продажа
+            </h5>
+
+            <p>
+              Продвигайте объявления
+              и получайте больше просмотров.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     ОБЪЯВЛЕНИЯ
+========================================= -->
+
+<section class="home-listings">
+
+  <div class="container">
+
+
+    <!-- Заголовок -->
+    <div class="home-section-header">
+
+      <div>
+
+        <span class="section-label">
+          Новые предложения
+        </span>
+
+        <h2>
+          Свежие автомобили
+        </h2>
+
+        <p>
+          Последние объявления на ManasAuto
+        </p>
+
+      </div>
+
+
+      <a
+        href="{% url 'listings:car_list' %}"
+        class="view-all-link"
+      >
+        Смотреть все
+
+        <i class="bi bi-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <!-- Карточки -->
+    <div class="row g-4">
+
+      {% for listing in listings %}
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+
+          <div class="car-card">
+
+
+            <!-- ССЫЛКА НА ВСЮ КАРТОЧКУ -->
+            <a
+              href="{% url 'listings:detail' listing.pk %}"
+              class="car-card-overlay-link"
+              aria-label="Открыть {{ listing.brand }} {{ listing.car_model }}"
+            ></a>
+
+
+            <!-- =====================================
+                 ФОТО
+            ====================================== -->
+
+            <div class="car-image-wrapper">
+
+
+              {% if listing.images.first %}
+
+                <img
+                  src="{{ listing.images.first.image.url }}"
+                  alt="{{ listing.brand }} {{ listing.car_model }}"
+                  class="car-image"
+                />
+
+              {% else %}
+
+                <div class="car-image-empty">
+
+                  <i class="bi bi-car-front-fill"></i>
+
+                  <span>
+                    Нет фото
+                  </span>
+
+                </div>
+
+              {% endif %}
+
+
+              <!-- Категория -->
+              {% if listing.category %}
+
+                <span class="car-category-badge">
+                  {{ listing.category.name }}
+                </span>
+
+              {% endif %}
+
+
+              <!-- TOP -->
+              {% if listing.top_active %}
+
+                <span class="home-top-badge">
+
+                  <i class="bi bi-lightning-fill"></i>
+
+                  TOP
+
+                </span>
+
+              {% endif %}
+
+
+              <!-- ПРОСМОТРЫ -->
+              <div class="home-car-views">
+
+                <i class="bi bi-eye-fill"></i>
+
+                <span>
+                  {{ listing.views_count }}
+                </span>
+
+              </div>
+
+
+              <!-- Избранное -->
+              <button
+                type="button"
+                class="car-favorite-btn"
+                aria-label="Добавить в избранное"
+              >
+                <i class="bi bi-heart"></i>
+              </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 ИНФОРМАЦИЯ
+            ====================================== -->
+
+            <div class="car-card-content">
+
+
+              <h3 class="car-name">
+
+                {{ listing.brand }}
+                {{ listing.car_model }}
+
+              </h3>
+
+
+              {% if listing.title %}
+
+                <p class="car-description">
+                  {{ listing.title|truncatechars:45 }}
+                </p>
+
+              {% endif %}
+
+
+              <div class="car-price">
+
+                {{ listing.price|floatformat:0 }}
+
+                <span>
+                  сом
+                </span>
+
+              </div>
+
+
+              <!-- Характеристики -->
+              <div class="car-specs">
+
+
+                <div class="car-spec">
+
+                  <i class="bi bi-calendar3"></i>
+
+                  <span>
+                    {{ listing.year }}
+                  </span>
+
+                </div>
+
+
+                <div class="car-spec">
+
+                  <i class="bi bi-speedometer2"></i>
+
+                  <span>
+                    {{ listing.mileage }} км
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="car-card-footer">
+
+                <span class="car-date">
+
+                  <i class="bi bi-clock"></i>
+
+                  {{ listing.created_at|date:"d.m.Y" }}
+
+                </span>
+
+
+                <a
+                  href="{% url 'listings:detail' listing.pk %}"
+                  class="car-detail-link"
+                >
+                  Подробнее
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      {% empty %}
+
+
+        <div class="col-12">
+
+          <div class="empty-listings">
+
+            <div class="empty-listings-icon">
+              <i class="bi bi-car-front"></i>
+            </div>
+
+            <h3>
+              Объявлений пока нет
+            </h3>
+
+            <p>
+              После добавления автомобилей
+              они появятся на главной странице.
+            </p>
+
+            <a
+              href="{% url 'core:create_listing' %}"
+              class="hero-primary-btn"
+            >
+              <i class="bi bi-plus-lg"></i>
+
+              Добавить объявление
+            </a>
+
+          </div>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     CTA / ПРОДАТЬ МАШИНУ
+========================================= -->
+
+<section class="home-sell">
+
+  <div class="container">
+
+    <div class="sell-banner">
+
+      <div>
+
+        <span class="sell-label">
+          ManasAuto
+        </span>
+
+        <h2>
+          Хотите продать автомобиль?
+        </h2>
+
+        <p>
+          Создайте объявление и покажите свой автомобиль
+          тысячам потенциальных покупателей.
+        </p>
+
+      </div>
+
+
+      <a
+        href="{% url 'core:create_listing' %}"
+        class="sell-btn"
+      >
+        <i class="bi bi-plus-circle"></i>
+
+        Подать объявление
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

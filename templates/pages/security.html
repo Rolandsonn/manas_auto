@@ -1,0 +1,328 @@
+{% extends "base.html" %} {% load static %} {% block title %} Безопасность —
+ManasAuto {% endblock %} {% block description %} Правила безопасной покупки и
+продажи автомобилей на ManasAuto. {% endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/security.css' %}?v=1" />
+
+<section class="security-page">
+  <!-- HERO -->
+  <section class="security-hero">
+    <div class="security-hero-content">
+      <span class="security-badge">
+        <i class="bi bi-shield-check"></i>
+        Безопасность ManasAuto
+      </span>
+
+      <h1>
+        Покупайте и продавайте
+        <span>без лишнего риска</span>
+      </h1>
+
+      <p>
+        Несколько простых правил помогут защитить ваши деньги, документы и
+        личные данные при покупке или продаже автомобиля.
+      </p>
+    </div>
+
+    <div class="security-hero-icon">
+      <i class="bi bi-shield-lock-fill"></i>
+    </div>
+  </section>
+
+  <!-- WARNING -->
+  <section class="security-warning">
+    <div class="security-warning-icon">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+    </div>
+
+    <div>
+      <h2>Главное правило</h2>
+
+      <p>
+        Не переводите деньги продавцу до личного осмотра автомобиля, проверки
+        документов и подтверждения личности владельца.
+      </p>
+    </div>
+  </section>
+
+  <!-- ПОКУПАТЕЛЮ -->
+  <section class="security-section">
+    <div class="security-heading">
+      <span> ПОКУПАТЕЛЮ </span>
+
+      <h2>Как безопасно покупать автомобиль</h2>
+
+      <p>
+        Перед передачей денег обязательно проверьте автомобиль и документы
+        лично.
+      </p>
+    </div>
+
+    <div class="security-grid">
+      <article class="security-card">
+        <div class="security-card-icon">
+          <i class="bi bi-car-front"></i>
+        </div>
+
+        <h3>Осмотрите автомобиль</h3>
+
+        <p>
+          Не покупайте автомобиль только по фотографиям. Проведите личный осмотр
+          и при возможности диагностику.
+        </p>
+      </article>
+
+      <article class="security-card">
+        <div class="security-card-icon">
+          <i class="bi bi-file-earmark-text"></i>
+        </div>
+
+        <h3>Проверьте документы</h3>
+
+        <p>
+          Сверьте данные автомобиля, VIN-код и документы продавца. Убедитесь,
+          что продавец имеет право распоряжаться автомобилем.
+        </p>
+      </article>
+
+      <article class="security-card">
+        <div class="security-card-icon">
+          <i class="bi bi-cash-coin"></i>
+        </div>
+
+        <h3>Не отправляйте предоплату</h3>
+
+        <p>
+          Особенно внимательно относитесь к просьбам перевести задаток за
+          бронирование автомобиля до его осмотра.
+        </p>
+      </article>
+
+      <article class="security-card">
+        <div class="security-card-icon">
+          <i class="bi bi-person-check"></i>
+        </div>
+
+        <h3>Проверьте продавца</h3>
+
+        <p>
+          Сравните имя владельца автомобиля с документами и уточните причину
+          продажи.
+        </p>
+      </article>
+
+      <article class="security-card">
+        <div class="security-card-icon">
+          <i class="bi bi-tools"></i>
+        </div>
+
+        <h3>Проведите диагностику</h3>
+
+        <p>
+          Перед покупкой желательно проверить двигатель, коробку передач,
+          ходовую часть и кузов автомобиля.
+        </p>
+      </article>
+
+      <article class="security-card">
+        <div class="security-card-icon">
+          <i class="bi bi-geo-alt"></i>
+        </div>
+
+        <h3>Встречайтесь в безопасном месте</h3>
+
+        <p>
+          Для осмотра выбирайте общественное место или проверенный автосервис.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ПРОДАВЦУ -->
+  <section class="security-section security-seller-section">
+    <div class="security-heading">
+      <span> ПРОДАВЦУ </span>
+
+      <h2>Как безопасно продавать автомобиль</h2>
+    </div>
+
+    <div class="security-seller-grid">
+      <div class="security-seller-item">
+        <div class="security-number">01</div>
+
+        <div>
+          <h3>Не передавайте документы заранее</h3>
+
+          <p>
+            Не отправляйте незнакомым людям фотографии документов, содержащие
+            лишние персональные данные.
+          </p>
+        </div>
+      </div>
+
+      <div class="security-seller-item">
+        <div class="security-number">02</div>
+
+        <div>
+          <h3>Проверяйте поступление денег</h3>
+
+          <p>
+            Не доверяйте скриншотам банковских переводов. Проверяйте фактическое
+            поступление денег в приложении банка.
+          </p>
+        </div>
+      </div>
+
+      <div class="security-seller-item">
+        <div class="security-number">03</div>
+
+        <div>
+          <h3>Осторожно с подозрительными ссылками</h3>
+
+          <p>
+            Не вводите данные банковской карты на неизвестных сайтах, которые
+            вам отправил потенциальный покупатель.
+          </p>
+        </div>
+      </div>
+
+      <div class="security-seller-item">
+        <div class="security-number">04</div>
+
+        <div>
+          <h3>Правильно оформляйте сделку</h3>
+
+          <p>
+            Передавайте автомобиль только после получения оплаты и правильного
+            оформления необходимых документов.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- МОШЕННИЧЕСТВО -->
+  <section class="fraud-section">
+    <div class="fraud-header">
+      <div class="fraud-icon">
+        <i class="bi bi-exclamation-octagon-fill"></i>
+      </div>
+
+      <div>
+        <span>ОСТОРОЖНО</span>
+
+        <h2>Признаки возможного мошенничества</h2>
+      </div>
+    </div>
+
+    <div class="fraud-list">
+      <div class="fraud-item">
+        <i class="bi bi-x-circle-fill"></i>
+
+        <span>
+          Цена автомобиля значительно ниже рыночной без понятной причины.
+        </span>
+      </div>
+
+      <div class="fraud-item">
+        <i class="bi bi-x-circle-fill"></i>
+
+        <span>
+          Продавец отказывается от личной встречи или осмотра автомобиля.
+        </span>
+      </div>
+
+      <div class="fraud-item">
+        <i class="bi bi-x-circle-fill"></i>
+
+        <span> Вас торопят и требуют срочно перевести деньги. </span>
+      </div>
+
+      <div class="fraud-item">
+        <i class="bi bi-x-circle-fill"></i>
+
+        <span>
+          Вам отправляют неизвестную ссылку для оплаты или получения денег.
+        </span>
+      </div>
+
+      <div class="fraud-item">
+        <i class="bi bi-x-circle-fill"></i>
+
+        <span>
+          Собеседник просит данные карты, пароль или код подтверждения.
+        </span>
+      </div>
+
+      <div class="fraud-item">
+        <i class="bi bi-x-circle-fill"></i>
+
+        <span>
+          Информация в объявлении не совпадает с реальными документами.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- БАНКОВСКАЯ БЕЗОПАСНОСТЬ -->
+  <section class="security-money">
+    <div class="security-money-icon">
+      <i class="bi bi-credit-card-2-front"></i>
+    </div>
+
+    <div class="security-money-content">
+      <span> ВАШИ ДАННЫЕ </span>
+
+      <h2>Никому не сообщайте данные банковской карты</h2>
+
+      <p>
+        Для получения перевода другому человеку не нужен ваш PIN-код, пароль от
+        интернет-банка или код подтверждения из SMS.
+      </p>
+
+      <div class="security-money-tags">
+        <span>
+          <i class="bi bi-x-lg"></i>
+          PIN-код
+        </span>
+
+        <span>
+          <i class="bi bi-x-lg"></i>
+          CVV/CVC
+        </span>
+
+        <span>
+          <i class="bi bi-x-lg"></i>
+          SMS-код
+        </span>
+
+        <span>
+          <i class="bi bi-x-lg"></i>
+          Пароль банка
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANASAUTO INFO -->
+  <section class="security-platform">
+    <div>
+      <span> MANASAUTO </span>
+
+      <h2>Помните о роли площадки</h2>
+
+      <p>
+        ManasAuto помогает продавцам публиковать объявления, а покупателям —
+        находить автомобили. Пользователи самостоятельно договариваются об
+        осмотре, оплате и оформлении сделки.
+      </p>
+    </div>
+
+    <a href="{% url 'core:home' %}" class="security-home-btn">
+      <i class="bi bi-car-front"></i>
+      Перейти к автомобилям
+    </a>
+  </section>
+</section>
+
+{% endblock %}

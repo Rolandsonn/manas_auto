@@ -1,0 +1,198 @@
+<header class="site-header">
+  <!-- =====================================
+       ВЕРХНЯЯ ПОЛОСКА
+  ====================================== -->
+  <div class="header-top">
+    <div class="header-container header-top-inner">
+      <div class="header-location">
+        <i class="bi bi-geo-alt-fill"></i>
+        <span>Жалал-Абадская область</span>
+      </div>
+
+      <div class="header-top-links">
+        <a href="#"> Помощь </a>
+
+        <a href="#"> Безопасность </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================
+       ОСНОВНАЯ НАВИГАЦИЯ
+  ====================================== -->
+  <nav class="navbar navbar-expand-lg main-navbar">
+    <div class="header-container">
+      <!-- ЛОГОТИП -->
+      <a class="navbar-brand header-logo" href="{% url 'core:home' %}">
+        <i class="bi bi-car-front-fill"></i>
+
+        Manas<span>Auto</span>
+      </a>
+
+      <!-- Кнопка мобильного меню -->
+      <button
+        class="navbar-toggler custom-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar"
+        aria-expanded="false"
+        aria-label="Открыть меню"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- =====================================
+           МЕНЮ
+      ====================================== -->
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <!-- ЛЕВАЯ ЧАСТЬ -->
+        <ul class="navbar-nav header-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'listings:car_list' %}">
+              Автомобили
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'listings:new_cars' %}"> Новые </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'listings:top_cars' %}">
+              <i class="bi bi-lightning-fill"></i>
+              ТОП
+            </a>
+          </li>
+        </ul>
+
+        <!-- =====================================
+             ПРАВАЯ ЧАСТЬ
+        ====================================== -->
+        <div class="header-actions">
+          <!-- Поиск -->
+          <a href="#" class="header-icon-btn" title="Поиск">
+            <i class="bi bi-search"></i>
+          </a>
+
+          <!-- Избранное -->
+          <a href="#" class="header-icon-btn" title="Избранное">
+            <i class="bi bi-heart"></i>
+          </a>
+
+          <!-- =================================
+               ЕСЛИ ПОЛЬЗОВАТЕЛЬ ВОШЁЛ
+          ================================== -->
+          {% if user.is_authenticated %}
+
+          <div class="dropdown">
+            <button
+              class="header-login header-user-button dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle"></i>
+
+              <span>
+                <span>{{ request.user.username }}</span>
+              </span>
+            </button>
+
+            <!-- Dropdown -->
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <div class="user-info">
+                  <div class="user-info">
+                    <strong>
+                      {{ user.first_name }} {{ user.last_name }}
+                    </strong>
+
+                    <span>{{ user.email }}</span>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <!-- Профиль -->
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{% url 'registration:profile' %}"
+                >
+                  <i class="bi bi-person me-2"></i>
+                  Профиль
+                </a>
+              </li>
+
+              <!-- Мои объявления -->
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="bi bi-card-list me-2"></i>
+                  Мои объявления
+                </a>
+              </li>
+
+              <!-- Избранное -->
+              <li>
+                <a class="dropdown-item" href="#">
+                  <i class="bi bi-heart me-2"></i>
+                  Избранное
+                </a>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <!-- Пока ссылка пустая -->
+              <li>
+                <form
+                  action="{% url 'registration:logout' %}"
+                  method="post"
+                  style="display: inline"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item text-danger">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    Выйти
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Подать объявление -->
+          <a href="{% url 'core:create_listing' %}" class="header-add-btn">
+            <i class="bi bi-plus-lg"></i>
+            Подать объявление
+          </a>
+
+          <!-- =================================
+               ЕСЛИ ПОЛЬЗОВАТЕЛЬ НЕ ВОШЁЛ
+          ================================== -->
+          {% else %}
+
+          <!-- Вход -->
+          <a href="{% url 'registration:login' %}" class="header-login">
+            <i class="bi bi-person-circle"></i>
+
+            <span> Войти </span>
+          </a>
+
+          <!-- Регистрация -->
+          <a href="{% url 'registration:register' %}" class="header-add-btn">
+            <i class="bi bi-person-plus"></i>
+
+            Регистрация
+          </a>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

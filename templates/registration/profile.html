@@ -1,0 +1,231 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}?v=3" />
+<section class="profile-page">
+  <div class="container">
+    <!-- Верх профиля -->
+    <div class="profile-header">
+      <!-- Аватар -->
+      <!-- Аватар -->
+      <div class="profile-avatar">
+        {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="{{ user.username }}" />
+        {% else %}
+        <i class="bi bi-person-fill"></i>
+        {% endif %}
+      </div>
+
+      <!-- Данные -->
+      <div class="profile-main-info">
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+
+        <p class="profile-username">@{{ user.username }}</p>
+
+        <p class="profile-email">
+          <i class="bi bi-envelope"></i>
+          {{ user.email }}
+        </p>
+      </div>
+
+      <!-- Кнопка редактирования -->
+      <div class="profile-header-actions">
+        <a
+          href="{% url 'registration:edit_profile' %}"
+          class="profile-edit-btn"
+        >
+          <i class="bi bi-pencil"></i>
+          Редактировать профиль
+        </a>
+      </div>
+    </div>
+
+    <!-- Основная часть -->
+    <div class="profile-content">
+      <!-- Левая колонка -->
+      <aside class="profile-sidebar">
+        <div class="profile-menu">
+          <a
+            href="{% url 'registration:profile' %}"
+            class="profile-menu-item active"
+          >
+            <i class="bi bi-person"></i>
+
+            <span> Профиль </span>
+          </a>
+
+          <a href="#my-listings" class="profile-menu-item">
+            <i class="bi bi-card-list"></i>
+
+            <span> Мои объявления </span>
+
+            <span class="profile-menu-count"> {{ listings_count }} </span>
+          </a>
+
+          <a href="#" class="profile-menu-item">
+            <i class="bi bi-heart"></i>
+
+            <span> Избранное </span>
+          </a>
+
+          <form
+            action="{% url 'registration:logout' %}"
+            method="POST"
+            class="profile-logout-form"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="profile-menu-item profile-logout">
+              <i class="bi bi-box-arrow-right"></i>
+
+              <span> Выйти </span>
+            </button>
+          </form>
+        </div>
+      </aside>
+
+      <!-- Правая часть -->
+      <main class="profile-main">
+        <!-- Информация об аккаунте -->
+        <div class="profile-card">
+          <div class="profile-card-header">
+            <div>
+              <h2>Личная информация</h2>
+
+              <p>Основные данные вашего аккаунта</p>
+            </div>
+          </div>
+
+          <div class="profile-info-grid">
+            <!-- Имя -->
+            <div class="profile-info-item">
+              <span class="profile-info-label"> Имя </span>
+
+              <strong> {{ user.first_name|default:"Не указано" }} </strong>
+            </div>
+
+            <!-- Фамилия -->
+            <div class="profile-info-item">
+              <span class="profile-info-label"> Фамилия </span>
+
+              <strong> {{ user.last_name|default:"Не указана" }} </strong>
+            </div>
+
+            <!-- Логин -->
+            <div class="profile-info-item">
+              <span class="profile-info-label"> Логин </span>
+
+              <strong> {{ user.username }} </strong>
+            </div>
+
+            <!-- Email -->
+            <div class="profile-info-item">
+              <span class="profile-info-label"> Email </span>
+
+              <strong> {{ user.email|default:"Не указан" }} </strong>
+            </div>
+
+            <!-- Дата регистрации -->
+            <div class="profile-info-item">
+              <span class="profile-info-label"> Дата регистрации </span>
+
+              <strong> {{ user.date_joined|date:"d.m.Y" }} </strong>
+            </div>
+
+            <!-- Количество объявлений -->
+            <div class="profile-info-item">
+              <span class="profile-info-label"> Объявлений </span>
+
+              <strong> {{ listings_count }} </strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Мои объявления -->
+        <div class="profile-card" id="my-listings">
+          <div class="profile-card-header">
+            <div>
+              <h2>Мои объявления</h2>
+
+              <p>Все объявления, которые вы разместили</p>
+            </div>
+
+            <a href="#" class="profile-add-btn">
+              <i class="bi bi-plus-lg"></i>
+
+              Добавить объявление
+            </a>
+          </div>
+
+          {% if listings %}
+
+          <div class="profile-listings">
+            {% for listing in listings %}
+
+            <div class="profile-listing-card">
+              <div class="profile-listing-content">
+                <h3>{{ listing.title }}</h3>
+
+                <div class="profile-listing-details">
+                  {% if listing.brand %}
+                  <span> {{ listing.brand }} </span>
+                  {% endif %} {% if listing.car_model %}
+                  <span> {{ listing.car_model }} </span>
+                  {% endif %} {% if listing.year %}
+                  <span> {{ listing.year }} г. </span>
+                  {% endif %} {% if listing.mileage %}
+                  <span> {{ listing.mileage }} км </span>
+                  {% endif %}
+                </div>
+
+                <div class="profile-listing-bottom">
+                  <strong class="profile-listing-price">
+                    {{ listing.price }} сом
+                  </strong>
+
+                  <span class="profile-listing-date">
+                    {{ listing.created_at|date:"d.m.Y" }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Пока ссылки оставляем # -->
+              <div class="profile-listing-actions">
+                <a href="#" class="listing-edit-btn">
+                  <i class="bi bi-pencil"></i>
+                </a>
+
+                <a href="#" class="listing-delete-btn">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </div>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          {% else %}
+
+          <!-- Если объявлений нет -->
+          <div class="profile-empty">
+            <div class="profile-empty-icon">
+              <i class="bi bi-car-front"></i>
+            </div>
+
+            <h3>У вас пока нет объявлений</h3>
+
+            <p>Разместите первое объявление о продаже автомобиля</p>
+
+            <a href="#" class="profile-add-btn">
+              <i class="bi bi-plus-lg"></i>
+
+              Добавить объявление
+            </a>
+          </div>
+
+          {% endif %}
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
